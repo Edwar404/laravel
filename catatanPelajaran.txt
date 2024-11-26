@@ -1,0 +1,14 @@
+MVC:
+- model      : database
+- view       : html, css, or javascript
+- controller : menghubungkan antara model dan view
+
+artisan      :
+composer     :
+method       : artisan kecakapan/kebisaan
+    - get    : melihat
+    - post   : mengirim data dari form (insert, update)
+    - put    : mengirim data dari form (update)
+    - delete : mengirim data dari form (delete)
+visibililasi : private, public, static
+/ (slash)    : adalah default route
