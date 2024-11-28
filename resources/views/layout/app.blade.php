@@ -123,6 +123,21 @@
 
         <!-- Main JS -->
         <script src="{{ asset('assets/assets/js/main.js') }}"></script>
+        <script>
+            $('.add-row').click(function(e) {
+                e.preventDefault();
+                let newRow = "";
+                newRow += "<tr>";
+                newRow += "<td>ini td</td>";
+                newRow += "<td>ini td</td>";
+                newRow += "<td>ini td</td>";
+                newRow += "<td>ini td</td>";
+                newRow += "</tr>";
+
+                let tbody = $('.tbody-parent')
+                tbody.append(newRow);
+            });
+        </script>
 
         <!-- Page JS -->
 
