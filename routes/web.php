@@ -24,6 +24,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('service', ServiceController::class);
     Route::resource('customer', CustomerController::class);
     Route::resource('trans_order', TransOrderController::class);
+
+    Route::get('get-paket/{id}', [TransOrderController::class, 'getPaket'])->name('get-paket');
 });
 
 Route::get('latihan', [LearningController::class, 'index']);

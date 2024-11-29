@@ -124,18 +124,57 @@
         <!-- Main JS -->
         <script src="{{ asset('assets/assets/js/main.js') }}"></script>
         <script>
+            $('#id_paket').change(function() {
+                let id_paket = $(this).val();
+                $.ajax({
+                    url: '/get-paket/' + id_paket,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(resp) {
+                        $('#price').val(resp.price)
+                    }
+                })
+            });
             $('.add-row').click(function(e) {
                 e.preventDefault();
+                let nama_paket = $('#id_paket').find('option:selected').text(),
+                    id_paket = $('#id_paket').val(),
+                    harga = $('#price').val(),
+                    qty = $('.qty').val(),
+                    subtotal = parseInt(harga) * parseInt(qty);
+                if (id_paket == '') {
+                    alert('MOHON ISI PAKET LAUNDRY TERLEBIH DAHULU');
+                    return false;
+                }
+                if (qty == '') {
+                    alert('MOHON ISI PAKET QUNATITY TERLEBIH DAHULU');
+                    return false;
+                }
+
                 let newRow = "";
                 newRow += "<tr>";
-                newRow += "<td>ini td</td>";
-                newRow += "<td>ini td</td>";
-                newRow += "<td>ini td</td>";
-                newRow += "<td>ini td</td>";
+                newRow += "<td>" + nama_paket +
+                    "<input type='hidden' name='id_paket[]' class='id_paket form-control' value='" + id_paket +
+                    "'></td>";
+                newRow += "<td>" + harga + "<input type='hidden' name='price_service[]' value='" + harga +
+                    "'></td>";
+                newRow += "<td>" + qty + "<input type='hidden' name='qty[]' id='qty' value='" + qty + "'></td>";
+                newRow += "<td>" + subtotal +
+                    "<input class='subtotal' type='hidden' name='subtotal[]' value='" + subtotal +
+                    "'></td>";
                 newRow += "</tr>";
 
                 let tbody = $('.tbody-parent')
                 tbody.append(newRow);
+
+                let total = 0;
+                $('.subtotal').each(function() {
+                    let totalHarga = parseFloat($(this).val() || 0);
+                    total += totalHarga;
+                });
+                $('.total-harga').val(total)
+                $('#id_paket').val('');
+                $('.qty').val('');
             });
         </script>
 
